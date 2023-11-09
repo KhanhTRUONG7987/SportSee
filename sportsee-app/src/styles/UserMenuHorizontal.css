@@ -1,4 +1,4 @@
-@import '../index.css'; /* Import global styles */ 
+@import "../index.css"; /* Import global styles */
 
 .user-menu-horizontal {
   display: flex;
@@ -7,13 +7,14 @@
   background-color: #020203;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 91px;
 }
 
 .logo {
   width: 177.997px;
   height: 60.934px;
   flex-shrink: 0;
-  margin-left: 29px;  
+  margin-left: 29px;
 }
 
 .nav-bar {
@@ -23,19 +24,21 @@
 
 .nav-item-list {
   display: flex;
-  gap: 219px; 
+  gap: 219px;
 }
 
 .nav-item {
   display: flex;
-  height: 24px;
   align-items: center;
   flex-shrink: 0;
   color: rgba(255, 255, 255, 1);
   cursor: pointer;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
 }
 
 .nav-item:last-child {
-  margin-right: 91px; 
+  margin-right: 91px;
 }
-
