@@ -10,6 +10,7 @@ const UserHeader = () => {
   );
 
   if (!user) {
+    console.log("User not found for ID:", id);
     return null;
   }
 
