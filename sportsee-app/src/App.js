@@ -1,8 +1,11 @@
+import React from 'react';
+import UserMenuHorizontal from './components/UserMenuHorizontal.jsx';
 
 function App() {
   return (
     <div className="App">
-      <p> SportSee App </p>
+      <UserMenuHorizontal />
+      
     </div>
   );
 }

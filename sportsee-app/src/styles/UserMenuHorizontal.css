@@ -1,0 +1,41 @@
+@import '../index.css'; /* Import global styles */ 
+
+.user-menu-horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #020203;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  width: 177.997px;
+  height: 60.934px;
+  flex-shrink: 0;
+  margin-left: 29px;  
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item-list {
+  display: flex;
+  gap: 219px; 
+}
+
+.nav-item {
+  display: flex;
+  height: 24px;
+  align-items: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.nav-item:last-child {
+  margin-right: 91px; 
+}
+
