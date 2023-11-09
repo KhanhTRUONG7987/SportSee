@@ -1,0 +1,15 @@
+@import "../index.css"; /* Import global styles */
+
+.App {
+  position: relative;
+}
+
+.user-profile {
+  width: 1126px;
+  height: 779px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 159px;
+  left: 224px;
+}
+
