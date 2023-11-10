@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import UserHeader from "./components/UserHeader";
 import ScreenSizeChecker from "./utils/ScreenSizeChecker.jsx";
 import UserMenuHorizontal from "./components/UserMenuHorizontal.jsx";
 import UserMenuVertical from "./components/UserMenuVertical.jsx";
@@ -13,9 +12,9 @@ const AppRoutes = () => {
       <ScreenSizeChecker />
       <UserMenuHorizontal />
       <UserMenuVertical />
-      <UserProfile />
+  
       <Routes>
-        <Route path="user/:id" element={<UserHeader />} />
+        <Route path="user/:id" element={<UserProfile />} />
       </Routes>
     </Router>
   );

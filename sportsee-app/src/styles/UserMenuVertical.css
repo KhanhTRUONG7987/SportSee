@@ -31,6 +31,7 @@
   cursor: pointer;
   background: rgba(255, 255, 255, 1);
   color: #FF0101;
+  border-radius: 6px; 
 }
 
 .user-menu-vertical p {

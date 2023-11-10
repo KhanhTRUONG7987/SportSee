@@ -1,18 +1,9 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { mockUserMainData } from "../services/mockData";
 import "../styles/UserHeader.css";
 
-const UserHeader = () => {
-  const { id } = useParams();
-  const user = mockUserMainData.find(
-    (userData) => userData.id.toString() === id
-  );
-
-  if (!user) {
-    console.log("User not found for ID:", id);
-    return null;
-  }
+const UserHeader = ({ userId }) => {
+  const user = mockUserMainData.find((userData) => userData.id.toString() === userId);
 
   return (
     <div className="user-header">
