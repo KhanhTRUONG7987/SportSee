@@ -1,0 +1,141 @@
+/* Apply global styles */
+@import "../index.css";
+
+.user-average-session-duration {
+  width: 258px;
+  height: 263px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 582px;
+}
+
+.main-rectangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background: #f00;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
+}
+
+.additional-rectangle {
+  width: 79px;
+  height: 263px;
+  flex-shrink: 0;
+  opacity: 0.0975;
+  background: #000;
+}
+
+.recharts-tooltip-wrapper {
+  opacity: 0.8;
+}
+
+.recharts-tooltip-label {
+  font-size: 12px;
+  color: white;
+  margin: 0;
+}
+
+.recharts-tooltip-item {
+  font-size: 12px;
+  color: white;
+}
+
+.recharts-default-tooltip {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+.recharts-layer.recharts-tooltip {
+  z-index: 1000;
+}
+
+.recharts-layer.recharts-tooltip-line {
+  z-index: 1001;
+}
+
+.recharts-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: transform 0.3s ease-out;
+}
+
+.recharts-default-tooltip-content {
+  padding: 8px 12px;
+}
+
+.recharts-tooltip-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(0, 0);
+  pointer-events: none;
+}
+
+.recharts-tooltip-label {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.recharts-tooltip-item {
+  display: block;
+  margin: 4px 0;
+  white-space: nowrap;
+}
+
+.recharts-tooltip-item-name {
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.recharts-tooltip-item-separator {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.recharts-tooltip-item-value {
+  display: inline-block;
+  margin: 2px 4px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+.customTooltip {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.labelTooltip {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.subtitle {
+  width: 147px;
+  flex-shrink: 0;
+  color: #fff;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; 
+  opacity: 0.504;
+  margin: 14px 77px 0px 34px;
+}
