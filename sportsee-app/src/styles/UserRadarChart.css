@@ -1,0 +1,68 @@
+@import "../index.css"; /* Import global styles */
+
+.user-radar-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 258px;
+  height: 263px;
+  background-color: rgba(40, 45, 48, 1);
+  position: absolute;
+  top: 582px;
+  left: 288px;
+  border-radius: 5px;
+  padding: 0px 30px;
+}
+
+.polygons {
+  padding: 40px 0px;
+}
+
+.vector {
+  padding-top: 10px;
+}
+
+/* styling for Recharts RadarChart */
+.recharts-wrapper {
+  position: relative;
+}
+
+.recharts-surface {
+  overflow: visible;
+}
+
+.recharts-polar-grid {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.recharts-polar-radius-axis-tick-value {
+  fill: white;
+  font-size: 12px;
+}
+
+.recharts-polar-radius-axis-line {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.recharts-polar-angle-axis-tick-line {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.recharts-polar-angle-axis-tick-value {
+  fill: white;
+  font-size: 9px;
+}
+
+.recharts-polar-angle-axis-line {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+/* Hide all lines inside the RadarChart */
+.recharts-polar-grid-angle line {
+  display: none;
+}
+
+/* Hide all tspan elements */
+.recharts-polar-radius-axis-tick-value tspan {
+  display: none;
+}
