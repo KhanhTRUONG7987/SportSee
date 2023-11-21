@@ -4,7 +4,6 @@ import {
   Radar,
   PolarGrid,
   PolarAngleAxis,
-  PolarRadiusAxis,
 } from "recharts";
 import "../styles/UserRadarChart.css";
 import { mockUserPerformance } from "../services/mockData";
@@ -35,11 +34,9 @@ const UserRadarChart = ({ userId }) => {
       >
         <PolarGrid />
         <PolarAngleAxis tickFormatter={formatTick} />
-        <PolarRadiusAxis angle={30} />
         <Radar
           name="User"
           dataKey="value"
-          stroke="white"
           fill="#FF0101"
           fillOpacity={0.7}
         />

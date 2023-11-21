@@ -35,15 +35,6 @@
   stroke: rgba(255, 255, 255, 0.3);
 }
 
-.recharts-polar-radius-axis-tick-value {
-  fill: white;
-  font-size: 12px;
-}
-
-.recharts-polar-radius-axis-line {
-  stroke: rgba(255, 255, 255, 0.3);
-}
-
 .recharts-polar-angle-axis-tick-line {
   stroke: rgba(255, 255, 255, 0.3);
 }
