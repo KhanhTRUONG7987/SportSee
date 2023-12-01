@@ -139,3 +139,7 @@
   opacity: 0.504;
   margin: 14px 77px 0px 34px;
 }
+
+.user-average-session-duration .recharts-cartesian-axis-ticks {
+  transform: translateY(35%);
+}

@@ -96,7 +96,7 @@ const UserAverageSessionDuration = ({ userId }) => {
       ></div>
       )}
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={average} margin={{ right: 30 }}>
+        <LineChart data={average} margin={{ top: 30, right: 0, left: 0, bottom: 100 }}>
           <defs>
             <clipPath id="chartClipPath">
               <rect x="-20" y="20" height="253" width="94" />

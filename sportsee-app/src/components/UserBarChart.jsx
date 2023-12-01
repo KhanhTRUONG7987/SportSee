@@ -79,7 +79,7 @@ const UserBarChart = ({ userId }) => {
           {chartData.map((_, index) => (
             <CartesianGrid
               key={index}
-              strokeDasharray={index === 0 ? "0" : "3 3"}
+              strokeDasharray={"3 3"}
               stroke="#ccc"
               vertical={false}
             />
@@ -96,10 +96,10 @@ const UserBarChart = ({ userId }) => {
                 fill="#9B9EAC"
                 fontSize={14}
               >
-                {payload.value}
+                {+payload.value}
               </text>
             )}
-            axisLine={false}
+            axisLine={true}
             tickLine={false}
           />
 

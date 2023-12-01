@@ -8,6 +8,8 @@
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   height: auto;
+  gap: 149px;
+  width: 100%;
 }
 
 .logo {
@@ -20,6 +22,7 @@
 .nav-bar {
   display: flex;
   align-items: center;
+  flex: 1;
 }
 
 .nav-item-list {
@@ -27,7 +30,7 @@
   flex-direction: row;
   align-items: center;
   justify-content:space-between;
-  gap: 204px;
+  flex: 1;
 }
 
 .nav-item {
