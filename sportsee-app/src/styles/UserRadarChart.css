@@ -8,14 +8,9 @@
   height: 263px;
   background-color: rgba(40, 45, 48, 1);
   position: absolute;
-  top: 582px;
+  top: 592px;
   left: 288px;
   border-radius: 5px;
-  padding: 0px 30px;
-}
-
-.polygons {
-  padding: 40px 0px;
 }
 
 .vector {
@@ -41,7 +36,7 @@
 
 .recharts-polar-angle-axis-tick-value {
   fill: white;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .recharts-polar-angle-axis-line {

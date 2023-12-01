@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  RadarChart,
-  Radar,
-  PolarGrid,
-  PolarAngleAxis,
-} from "recharts";
+import { RadarChart, Radar, PolarGrid, PolarAngleAxis } from "recharts";
 import "../styles/UserRadarChart.css";
 import { mockUserPerformance } from "../services/mockData";
 
@@ -20,7 +15,27 @@ const UserRadarChart = ({ userId }) => {
 
   // Custom tick formatter
   const formatTick = (value) => {
-    return userPerformanceData.kind[value + 1];
+    const kindKeys = Object.keys(userPerformanceData.kind);
+    const totalTicks = kindKeys.length;
+    const formattedTickKey = kindKeys[(totalTicks - value - 1) % totalTicks];
+
+    // customize tick names
+    switch (formattedTickKey) {
+      case "1":
+        return "Cardio";
+      case "2":
+        return "Energie";
+      case "3":
+        return "Endurance";
+      case "4":
+        return "Force";
+      case "5":
+        return "Vitesse";
+      case "6":
+        return "Intensité";
+      default:
+        return formattedTickKey; // original tick name
+    }
   };
 
   return (
@@ -28,18 +43,13 @@ const UserRadarChart = ({ userId }) => {
       <RadarChart
         className="polygons"
         outerRadius={90}
-        width={180}
-        height={180}
+        width={258}
+        height={263}
         data={userPerformanceData.data}
       >
         <PolarGrid />
         <PolarAngleAxis tickFormatter={formatTick} />
-        <Radar
-          name="User"
-          dataKey="value"
-          fill="#FF0101"
-          fillOpacity={0.7}
-        />
+        <Radar name="User" dataKey="value" fill="#FF0101" fillOpacity={0.7} />
       </RadarChart>
     </div>
   );

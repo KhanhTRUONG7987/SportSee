@@ -10,8 +10,9 @@
   padding: 24px;
   box-sizing: border-box;
   position: absolute;
+  margin-top: 47px;
   margin-bottom: 20px;
-  top: 142px;
+  top: 112px;
 }
 
 .title-legend-group {

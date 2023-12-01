@@ -7,7 +7,7 @@
   background-color: #020203;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  height: 91px;
+  height: auto;
 }
 
 .logo {
@@ -24,21 +24,20 @@
 
 .nav-item-list {
   display: flex;
-  gap: 219px;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-between;
+  gap: 204px;
 }
 
 .nav-item {
   display: flex;
-  align-items: center;
-  flex-shrink: 0;
   color: rgba(255, 255, 255, 1);
   cursor: pointer;
   font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
+  font-weight: 100;
 }
 
 .nav-item:last-child {
-  margin-right: 91px;
+  margin-right: 20px;
 }

@@ -1,0 +1,57 @@
+@import "../index.css"; /* Import global styles */
+
+.user-pie-chart {
+  width: 258px;
+  height: 263px;
+  flex-shrink: 0;
+  background: rgba(251, 251, 251, 1);
+  position: absolute;
+  top: 592px;
+  left: 576px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score {
+  color: #20253a;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  align-items:flex-start;
+  padding-top: 26px;
+}
+
+/* Pie chart */
+.pie-chart {
+  width: 217.715px;
+  height: 217.715px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.KPI {
+  color: #282d30;
+  text-align: center;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  padding-bottom: 70px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-45%, -20%);
+}
+
+/* Styles for "de votre objectif" */
+.text-span {
+  color: #74798c;
+  font-size: 16px;
+  font-weight: 100;
+  position: absolute;
+  top: 50%;
+  transform: translate(-45%, 30%);
+  max-width: 30%;
+  text-align: center;
+  line-height: 26px;
+}
