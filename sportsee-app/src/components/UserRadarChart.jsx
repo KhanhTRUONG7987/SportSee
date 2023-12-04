@@ -64,7 +64,7 @@ const UserRadarChart = ({ userId }) => {
         data={userPerformanceData.data}
       >
         <PolarGrid />
-        <PolarAngleAxis tickFormatter={formatTick} dataKey="kind" tick={{ fontSize: 3 }}/> 
+        <PolarAngleAxis tickFormatter={formatTick} dataKey="kind" tick={{ fontSize: 3, dy: 3}}/> 
         <Radar name="User" dataKey="value" fill="#FF0101" fillOpacity={0.7} />
       </RadarChart>
     </div>
