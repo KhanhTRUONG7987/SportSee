@@ -13,12 +13,14 @@ import blackOval from "../assets/images/blackOval.png";
 import redOval from "../assets/images/redOval.png";
 import "../styles/UserBarChart.css";
 
+// UserBarChart component
 const UserBarChart = ({ userId }) => {
+  // State to store user data and tooltip data
   const [userData, setUserData] = useState(null);
   const [tooltipData, setTooltipData] = useState(null);
 
+  // Fetch user activity data when the component mounts or userId changes
   useEffect(() => {
-    // Fetch user activity data when the component mounts
     const fetchUserActivity = async () => {
       try {
         const userActivityData = await apiService.getUserActivity(userId);
@@ -29,40 +31,43 @@ const UserBarChart = ({ userId }) => {
     };
 
     fetchUserActivity();
-  }, [userId]); // Fetch data when the userId changes
+  }, [userId]);
 
+  // Handle mouse enter event for a bar
   const handleBarMouseEnter = (data, index) => {
     if (
       !userData ||
       !userData.sessions ||
       !userData.sessions[index] ||
-      !userData.sessions[index].sessions // Check if sessions array exists
+      !userData.sessions[index].sessions
     ) {
       console.error("Invalid user data or sessions:", userData);
       return;
     }
-  
+
     const { day, sessions } = userData.sessions[index];
-    const { kilogram, calories } = sessions[0]; 
-  
+    const { kilogram, calories } = sessions[0];
+
     console.log("Day:", day, "Weight:", kilogram, "Calories:", calories);
     setTooltipData({ day, kilogram, calories });
   };
-  
 
+  // Handle mouse leave event for a bar
   const handleBarMouseLeave = () => {
     setTooltipData(null);
   };
 
-  // Check if userData is available before generating chartData
-  const chartData = userData && userData.sessions
-    ? userData.sessions.map((session) => ({
-        day: session.day.substring(8),
-        weight: session.kilogram,
-        calories: session.calories,
-      }))
-    : [];
+  // Generate chart data based on user data
+  const chartData =
+    userData && userData.sessions
+      ? userData.sessions.map((session) => ({
+          day: session.day.substring(8),
+          weight: session.kilogram,
+          calories: session.calories,
+        }))
+      : [];
 
+  // CustomTooltip component for displaying custom tooltips
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const { weight, calories } = payload[0].payload;
@@ -76,6 +81,7 @@ const UserBarChart = ({ userId }) => {
     return null;
   };
 
+  // Render the UserBarChart component
   return (
     <div className="user-bar-chart">
       <div className="title-legend-group">
@@ -92,13 +98,13 @@ const UserBarChart = ({ userId }) => {
         </div>
       </div>
 
-      {/* Wrap the chart in a styled div */}
       <div className="chart-container" style={{ padding: 5 }}>
         <ResponsiveContainer width={735} height={320} padding={50}>
           <BarChart
             data={chartData}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
+            {/* Render CartesianGrid for the chart */}
             {chartData.map((_, index) => (
               <CartesianGrid
                 key={index}
@@ -108,6 +114,7 @@ const UserBarChart = ({ userId }) => {
               />
             ))}
 
+            {/* Render X-axis with custom ticks */}
             <XAxis
               dataKey="day"
               tickLine={false}
@@ -129,6 +136,7 @@ const UserBarChart = ({ userId }) => {
               padding={{ left: -42, right: -42 }}
             />
 
+            {/* Render Y-axis with custom styling */}
             <YAxis
               className="custom-y-axis"
               line
@@ -138,6 +146,7 @@ const UserBarChart = ({ userId }) => {
               axisLine={false}
               tickLine={false}
             />
+            {/* Render Tooltip with custom styling */}
             <Tooltip
               cursor={{
                 width: 102,
@@ -146,6 +155,7 @@ const UserBarChart = ({ userId }) => {
               wrapperStyle={{ left: 5 }}
             />
 
+            {/* Render bars for weight and calories */}
             <Bar
               dataKey="weight"
               fill="#282D30"

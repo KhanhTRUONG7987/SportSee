@@ -70,15 +70,26 @@ export const apiService = {
 
   // Standardize user performance format
   standardizeUserPerformance: (performanceData) => {
-    if (!performanceData || !performanceData.userId || !performanceData.data) {
+    if (
+      !performanceData ||
+      !performanceData.data ||
+      !performanceData.data.kind
+    ) {
       console.error("Error: Invalid user performance data:", performanceData);
       throw new Error("Invalid user performance data");
     }
 
+    const kind = Array.isArray(performanceData.data.kind)
+      ? performanceData.data.kind.reduce(
+          (acc, kindItem, index) => ({ ...acc, [index + 1]: kindItem }),
+          {}
+        )
+      : performanceData.data.kind;
+
     return {
       userId: performanceData.userId,
-      kind: performanceData.kind,
-      data: performanceData.data.map((dataPoint) => ({
+      kind,
+      data: performanceData.data.data.map((dataPoint) => ({
         value: dataPoint.value,
         kind: dataPoint.kind,
       })),

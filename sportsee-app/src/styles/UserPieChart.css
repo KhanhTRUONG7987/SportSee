@@ -14,33 +14,34 @@
   align-items: center;
 }
 
-.score {
+.user-pie-chart .subtitle {
+  width: 60%;
+  position: absolute;
+  top: 10px;
   color: #20253a;
   font-size: 15px;
-  font-style: normal;
-  font-weight: 500;
-  align-items: flex-start;
-  padding-top: 26px;
+  font-weight: 700;
+  line-height: 24px; /* 160% */
 }
 
 /* Pie chart */
-.pie-chart {
-  width: 218px;
-  height: 218px;
-  flex-shrink: 0;
-  position: relative;
+.custom-label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 10000;
 }
 
-.KPI {
+.custom-score {
+  font-size: 24px;
   color: #282d30;
-  text-align: center;
-  font-size: 26px;
-  font-style: normal;
-  font-weight: 700;
-  padding-bottom: 70px;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  font-family: 'Roboto-Bold';
+  padding-bottom: 20px;
 }
 
 /* Styles for "de votre objectif" */
@@ -49,9 +50,10 @@
   font-size: 16px;
   font-weight: 100;
   position: absolute;
-  top: 50%;
-  transform: translate(-50%, 50%);
   max-width: 30%;
   text-align: center;
   line-height: 26px;
+  left: 35%;
+  top: 78%;
 }
+

@@ -13,6 +13,7 @@ import {
 import { apiService } from "../services/apiService";
 import "../styles/UserAverageSessionDuration.css";
 
+// CustomTooltip component for displaying custom tooltips
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
@@ -24,17 +25,21 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const CustomXAxisTick = ({ x, y, payload }) => {
+// CustomXAxisTick component for customizing X-axis ticks
+const CustomXAxisTick = ({ x, y, payload, arrayLength }) => {
   return (
     <g transform={`translate(${x},${y})`}>
       <text
         x={5}
         y={-25}
+        dx={
+          payload.index === 0 ? 5 : payload.index === arrayLength - 1 ? 10 : 0
+        }
         dy={0}
         textAnchor="end"
         fill="#FFF"
         className={"customXAxis"}
-        style={{ letterSpacing: "2px" }}
+        style={{ letterSpacing: "0.1px" }}
       >
         {payload.value}
       </text>
@@ -42,19 +47,38 @@ const CustomXAxisTick = ({ x, y, payload }) => {
   );
 };
 
+// CustomCursor component for customizing the cursor in the chart
+const CustomCursor = (props) => {
+  console.log(props); // log cursor props debugging
+  return (
+    <Rectangle
+      fill="blue"
+      opacity={0.0975}
+      stroke="#000"
+      x={props.points[0].x}
+      y={-62}
+      width={258}
+      height={263}
+    />
+  );
+};
+
+// UserAverageSessionDuration component
 const UserAverageSessionDuration = ({ userId }) => {
+  // State to store user average session data and clicked dot index
   const [average, setAverage] = useState([]);
   const [clickedDotIndex, setClickedDotIndex] = useState(null);
   const day = ["L", "M", "M", "J", "V", "S", "D"];
 
+  // Fetch user average sessions data from the API
   useEffect(() => {
-    // Fetch user average sessions data from the API
     const fetchUserAverageSessions = async () => {
       try {
         const userAverageSessions = await apiService.getUserAverageSessions(
           userId
         );
 
+        // Transform fetched data for use in the chart
         const data = userAverageSessions.sessions.map((session, index) => ({
           day: day[index],
           sessionLength: session.sessionLength,
@@ -72,13 +96,13 @@ const UserAverageSessionDuration = ({ userId }) => {
     fetchUserAverageSessions();
   }, [userId]);
 
+  // Fetch user main data from the API
   useEffect(() => {
-    // Fetch user main data from the API
     const fetchUserMainData = async () => {
       try {
-        // Use the getUserMainData function from apiService
         const userMainData = await apiService.getUserMainData(userId);
 
+        // Log an error if user main data is not found
         if (!userMainData) {
           console.error(`User main data not found for ID: ${userId}`);
           return;
@@ -91,17 +115,20 @@ const UserAverageSessionDuration = ({ userId }) => {
     fetchUserMainData();
   }, [userId]);
 
+  // Render the UserAverageSessionDuration component
   return (
     <div className="user-average-session-duration">
       <div className="main-rectangle"></div>
       <h3 className={"subtitle"}>Durée moyenne des sessions</h3>
 
+      {/* Render the chart */}
       <div style={{ width: "100%", height: "300px" }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={average}
             margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
           >
+            {/* Define linear gradient for the line chart */}
             <defs>
               <linearGradient
                 id="lineGradient"
@@ -121,6 +148,7 @@ const UserAverageSessionDuration = ({ userId }) => {
               </linearGradient>
             </defs>
 
+            {/* Render the line chart */}
             <Line
               type="natural"
               dataKey="sessionLength"
@@ -131,6 +159,7 @@ const UserAverageSessionDuration = ({ userId }) => {
               clipPath="url(#chartClipPath)"
             />
 
+            {/* Render scatter plot with clickable dots */}
             <Scatter
               data={average}
               fill="#fff"
@@ -141,6 +170,7 @@ const UserAverageSessionDuration = ({ userId }) => {
               ))}
             </Scatter>
 
+            {/* Render reference dot on clicked dot */}
             {clickedDotIndex !== null && (
               <ReferenceDot
                 x={clickedDotIndex}
@@ -150,38 +180,19 @@ const UserAverageSessionDuration = ({ userId }) => {
               />
             )}
 
-            {/* Add the dynamic overlay */}
-            <Rectangle
-              x={
-                clickedDotIndex !== null
-                  ? (clickedDotIndex * 100) / (average.length - 1)
-                  : 0
-              }
-              y={0}
-              width={
-                clickedDotIndex !== null
-                  ? 100 - (clickedDotIndex * 100) / (average.length - 1) + "%"
-                  : 0
-              }
-              height="100%"
-              fill="#000"
-              visibility={clickedDotIndex !== null ? "visible" : "hidden"}
-              opacity={0.0975}
-              zIndex={100000}
-            />
-
+            {/* Render X-axis with custom ticks */}
             <XAxis
               dataKey="day"
               axisLine={false}
               tickLine={false}
-              padding={{ left: 10, right: 10 }}
+              padding={{ left: 0, right: 0 }}
               tick={<CustomXAxisTick />}
+              interval={0}
+              dx={-20}
             />
 
-            <Tooltip
-              content={<CustomTooltip />}
-              cursor={{ stroke: "rgba(0, 0, 0, 0.1)", strokeWidth: 0 }}
-            />
+            {/* Render custom tooltip and cursor in the chart */}
+            <Tooltip content={<CustomTooltip />} cursor={<CustomCursor />} />
           </LineChart>
         </ResponsiveContainer>
       </div>
