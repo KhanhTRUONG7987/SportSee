@@ -113,7 +113,7 @@ const UserBarChart = ({ userId }) => {
               tickLine={false}
               ticks={chartData.map((entry) => entry.day)}
               tick={({ x, y, payload }) => (
-                <span
+                <text
                   x={x}
                   y={y}
                   dy={16}
@@ -122,7 +122,7 @@ const UserBarChart = ({ userId }) => {
                   fontSize={14}
                 >
                   {+payload.value}
-                </span>
+                </text>
               )}
               axisLine={{ stroke: "#DEDEDE" }}
               interval="preserveStartEnd"
