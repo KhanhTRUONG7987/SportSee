@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Cell } from "recharts";
+import { apiService } from "../services/apiService"; // Import the apiService
 import "../styles/UserPieChart.css";
-import { mockUserMainData } from "../services/mockData";
 
 const COLORS = ["#FF0000", "#fff"];
 
 const UserPieChart = ({ userId }) => {
-  const userMainData = mockUserMainData.find(
-    (data) => data.id === parseInt(userId)
-  );
+  const [userMainData, setUserMainData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await apiService.getUserMainData(userId);
+        setUserMainData(data);
+      } catch (error) {
+        console.error("Error fetching user main data:", error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
 
   if (!userMainData) {
-    console.error(`User main data not found for ID: ${userId}`);
-    return <p className="error-message">User main data not found</p>;
+    return <p>Loading...</p>;
   }
 
   return (
@@ -22,13 +32,16 @@ const UserPieChart = ({ userId }) => {
       <div className="pie-chart">
         <PieChart width={218} height={218}>
           <Pie
-            data={[{ value: userMainData.todayScore * 100 }, { value: 100 - userMainData.todayScore * 100 }]}
+            data={[
+              { value: userMainData.todayScore * 100 },
+              { value: 100 - userMainData.todayScore * 100 },
+            ]}
             cx={109}
             cy={109}
             innerRadius={80}
             outerRadius={90}
             startAngle={90}
-            endAngle={-270}
+            endAngle={userMainData.todayScore * 360}
             fill="#FF0000"
             dataKey="value"
           >
@@ -38,10 +51,11 @@ const UserPieChart = ({ userId }) => {
           </Pie>
         </PieChart>
       </div>
-      <text>
+     
+      <span>
         <span className="KPI">{userMainData.todayScore * 100}%</span>
         <span className="text-span"> de votre objectif</span>
-      </text>
+      </span>
     </div>
   );
 };

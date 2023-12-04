@@ -21,20 +21,20 @@ const UserRadarChart = ({ userId }) => {
 
     // customize tick names
     switch (formattedTickKey) {
-      case "1":
+      case "cardio":
         return "Cardio";
-      case "2":
+      case "energy":
         return "Energie";
-      case "3":
+      case "endurance":
         return "Endurance";
-      case "4":
+      case "strength":
         return "Force";
-      case "5":
+      case "speed":
         return "Vitesse";
-      case "6":
+      case "intensity":
         return "Intensité";
       default:
-        return formattedTickKey; // original tick name
+        return formattedTickKey; 
     }
   };
 

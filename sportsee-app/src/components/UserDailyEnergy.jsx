@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/UserDailyEnergy.css';
-import { mockUserMainData } from '../services/mockData';
+import { apiService } from '../services/apiService'; // Import the apiService
 
 const NutrientSection = ({ nutrientType, count, unit, color, iconPath }) => {
   return (
@@ -13,21 +13,36 @@ const NutrientSection = ({ nutrientType, count, unit, color, iconPath }) => {
           </svg>
         )}
       </div>
-      <text className="text">
+      <span className="textInfos">
         {count && (
           <span className={`${nutrientType.toLowerCase()}-text`}>{count}{unit}</span>
         )}
         <span className={`${nutrientType.toLowerCase()}-text-small`}>{nutrientType}</span>
-      </text>
+      </span>
     </div>
   );
 };
 
 const UserDailyEnergy = ({ userId }) => {
-  const userData = mockUserMainData.find((user) => user.id === parseInt(userId));
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // fetch user main data
+        const data = await apiService.getUserMainData(userId);
+        setUserData(data);
+      } catch (error) {
+        // Handle error 
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchData(); // call fetchData function when the component mounts
+  }, [userId]); // add userId to the dependency array to re-fetch data when userId changes
 
   if (!userData) {
-    return <p>User data not found.</p>;
+    return <p>Loading...</p>; // show a loading indicator while fetching data
   }
 
   return (

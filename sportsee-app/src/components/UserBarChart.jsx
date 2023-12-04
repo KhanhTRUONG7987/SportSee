@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -8,38 +8,60 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { mockUserActivity } from "../services/mockData";
+import { apiService } from "../services/apiService";
 import blackOval from "../assets/images/blackOval.png";
 import redOval from "../assets/images/redOval.png";
 import "../styles/UserBarChart.css";
 
 const UserBarChart = ({ userId }) => {
-  const userData = mockUserActivity.find(
-    (data) => data.userId.toString() === userId
-  );
-
+  const [userData, setUserData] = useState(null);
   const [tooltipData, setTooltipData] = useState(null);
 
+  useEffect(() => {
+    // Fetch user activity data when the component mounts
+    const fetchUserActivity = async () => {
+      try {
+        const userActivityData = await apiService.getUserActivity(userId);
+        setUserData(userActivityData);
+      } catch (error) {
+        console.error("Error fetching user activity data:", error);
+      }
+    };
+
+    fetchUserActivity();
+  }, [userId]); // Fetch data when the userId changes
+
   const handleBarMouseEnter = (data, index) => {
-    const { day, kilogram, calories } = userData.sessions[index];
+    if (
+      !userData ||
+      !userData.sessions ||
+      !userData.sessions[index] ||
+      !userData.sessions[index].sessions // Check if sessions array exists
+    ) {
+      console.error("Invalid user data or sessions:", userData);
+      return;
+    }
+  
+    const { day, sessions } = userData.sessions[index];
+    const { kilogram, calories } = sessions[0]; 
+  
     console.log("Day:", day, "Weight:", kilogram, "Calories:", calories);
     setTooltipData({ day, kilogram, calories });
   };
+  
 
   const handleBarMouseLeave = () => {
     setTooltipData(null);
   };
 
-  if (!userData) {
-    console.error(`User data not found for ID: ${userId}`);
-    return <p className="error-message">User data not found</p>;
-  }
-
-  const chartData = userData.sessions.map((session) => ({
-    day: session.day.substring(8),
-    weight: session.kilogram,
-    calories: session.calories,
-  }));
+  // Check if userData is available before generating chartData
+  const chartData = userData && userData.sessions
+    ? userData.sessions.map((session) => ({
+        day: session.day.substring(8),
+        weight: session.kilogram,
+        calories: session.calories,
+      }))
+    : [];
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -70,67 +92,79 @@ const UserBarChart = ({ userId }) => {
         </div>
       </div>
 
-      <ResponsiveContainer width={835} height={320}>
-        <BarChart
-          data={chartData}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-        >
-          {/* Render dashed horizontal grid lines for all except the first one */}
-          {chartData.map((_, index) => (
-            <CartesianGrid
-              key={index}
-              strokeDasharray={"3 3"}
-              stroke="#ccc"
-              vertical={false}
+      {/* Wrap the chart in a styled div */}
+      <div className="chart-container" style={{ padding: 5 }}>
+        <ResponsiveContainer width={735} height={320} padding={50}>
+          <BarChart
+            data={chartData}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          >
+            {chartData.map((_, index) => (
+              <CartesianGrid
+                key={index}
+                strokeDasharray={"3 3"}
+                stroke="#ccc"
+                vertical={false}
+              />
+            ))}
+
+            <XAxis
+              dataKey="day"
+              tickLine={false}
+              ticks={chartData.map((entry) => entry.day)}
+              tick={({ x, y, payload }) => (
+                <span
+                  x={x}
+                  y={y}
+                  dy={16}
+                  textAnchor="middle"
+                  fill="#9B9EAC"
+                  fontSize={14}
+                >
+                  {+payload.value}
+                </span>
+              )}
+              axisLine={{ stroke: "#DEDEDE" }}
+              interval="preserveStartEnd"
+              padding={{ left: -42, right: -42 }}
             />
-          ))}
 
-          <XAxis
-            dataKey="day"
-            tick={({ x, y, payload }) => (
-              <text
-                x={x}
-                y={y}
-                dy={16}
-                textAnchor="middle"
-                fill="#9B9EAC"
-                fontSize={14}
-              >
-                {+payload.value}
-              </text>
-            )}
-            axisLine={true}
-            tickLine={false}
-          />
+            <YAxis
+              className="custom-y-axis"
+              line
+              orientation="right"
+              fontSize={14}
+              tick={{ fill: "#9B9EAC" }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <Tooltip
+              cursor={{
+                width: 102,
+              }}
+              content={<CustomTooltip />}
+              wrapperStyle={{ left: 5 }}
+            />
 
-          <YAxis
-            line
-            orientation="right"
-            fontSize={14}
-            tick={{ fill: "#9B9EAC" }}
-            axisLine={false}
-            tickLine={false}
-          />
-          <Tooltip content={<CustomTooltip />} />
-
-          <Bar
-            dataKey="weight"
-            fill="#282D30"
-            barSize={7}
-            radius={[3.5, 3.5, 0, 0]}
-            onMouseEnter={handleBarMouseEnter}
-            onMouseLeave={handleBarMouseLeave}
-          />
-          <Bar
-            dataKey="calories"
-            fill="#E60000"
-            barSize={7}
-            radius={[3, 3, 0, 0]}
-            onMouseEnter={handleBarMouseEnter}
-            onMouseLeave={handleBarMouseLeave}
-          />
-        </BarChart>
-      </ResponsiveContainer>
+            <Bar
+              dataKey="weight"
+              fill="#282D30"
+              barSize={7}
+              radius={[3.5, 3.5, 0, 0]}
+              onMouseEnter={(props, index) => handleBarMouseEnter(props, index)}
+              onMouseLeave={handleBarMouseLeave}
+            />
+            <Bar
+              dataKey="calories"
+              fill="#E60000"
+              barSize={7}
+              radius={[3, 3, 0, 0]}
+              onMouseEnter={(props, index) => handleBarMouseEnter(props, index)}
+              onMouseLeave={handleBarMouseLeave}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
