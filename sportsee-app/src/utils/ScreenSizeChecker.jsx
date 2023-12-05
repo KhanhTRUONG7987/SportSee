@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/ScreenSizeChecker.css';
 
-const ScreenSizeChecker = () => {
+const ScreenSizeChecker = ({ children }) => {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -21,14 +21,13 @@ const ScreenSizeChecker = () => {
     };
   }, []);
 
-  return (
+  return screenSize.width < 1024 || screenSize.height < 780 ? (
     <div className="screen-size-checker">
-      {screenSize.width >= 1024 && screenSize.height >= 780 ? (
-        <p>Your screen size is sufficient for viewing the profile page.</p>
-      ) : (
-        <p>Your screen size is not sufficient for viewing the profile page. Please adjust your screen resolution.</p>
-      )}
+      <p>Your screen size is not sufficient for viewing the profile page. Please adjust your screen resolution.</p>
     </div>
+  ) : (
+    // Render the children (user profile page) if screen size is sufficient
+    <>{children}</>
   );
 };
 

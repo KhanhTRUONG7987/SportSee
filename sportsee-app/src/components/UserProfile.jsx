@@ -5,9 +5,12 @@ import UserAverageSessionDuration from "./UserAverageSessionDuration";
 import UserRadarChart from "./UserRadarChart";
 import UserPieChart from "./UserPieChart";
 import UserDailyEnergy from "./UserDailyEnergy";
-import "../styles/UserProfile.css";
+import UserMenuHorizontal from "./UserMenuHorizontal.jsx";
+import UserMenuVertical from "./UserMenuVertical.jsx";
 import { useParams } from "react-router-dom";
 import { apiService } from "../services/apiService";
+import "../styles/UserProfile.css";
+import ScreenSizeChecker from "../utils/ScreenSizeChecker";
 
 const UserProfile = () => {
   const { id } = useParams();
@@ -24,17 +27,21 @@ const UserProfile = () => {
     };
 
     fetchUserData();
-  }, [id]); 
+  }, [id]);
 
   return (
-    <div className="user-profile">
-      <UserHeader userId={id} />
-      <UserBarChart userId={id} userMainData={userData} />
-      <UserAverageSessionDuration userId={id} />
-      <UserRadarChart userId={id} />   
-      <UserPieChart userId={id} userMainData={userData} />   
-      <UserDailyEnergy userId={id} />
-    </div>
+    <ScreenSizeChecker>
+      <UserMenuHorizontal />
+      <UserMenuVertical />
+      <div className="user-profile">
+        <UserHeader userId={id} />
+        <UserBarChart userId={id} userMainData={userData} />
+        <UserAverageSessionDuration userId={id} />
+        <UserRadarChart userId={id} />
+        <UserPieChart userId={id} userMainData={userData} />
+        <UserDailyEnergy userId={id} />
+      </div>
+    </ScreenSizeChecker>
   );
 };
 

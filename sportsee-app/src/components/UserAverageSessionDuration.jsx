@@ -26,15 +26,12 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 // CustomXAxisTick component for customizing X-axis ticks
-const CustomXAxisTick = ({ x, y, payload, arrayLength }) => {
+const CustomXAxisTick = ({ x, y, payload }) => {
   return (
     <g transform={`translate(${x},${y})`}>
       <text
         x={5}
         y={-25}
-        dx={
-          payload.index === 0 ? 5 : payload.index === arrayLength - 1 ? 10 : 0
-        }
         dy={0}
         textAnchor="end"
         fill="#FFF"
@@ -49,10 +46,10 @@ const CustomXAxisTick = ({ x, y, payload, arrayLength }) => {
 
 // CustomCursor component for customizing the cursor in the chart
 const CustomCursor = (props) => {
-  console.log(props); // log cursor props debugging
+  console.log(props); 
   return (
     <Rectangle
-      fill="blue"
+      fill="#000"
       opacity={0.0975}
       stroke="#000"
       x={props.points[0].x}
@@ -123,7 +120,7 @@ const UserAverageSessionDuration = ({ userId }) => {
 
       {/* Render the chart */}
       <div style={{ width: "100%", height: "300px" }}>
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer>
           <LineChart
             data={average}
             margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
@@ -185,10 +182,9 @@ const UserAverageSessionDuration = ({ userId }) => {
               dataKey="day"
               axisLine={false}
               tickLine={false}
-              padding={{ left: 0, right: 0 }}
+              padding={{ left: 15, right: 15 }}
               tick={<CustomXAxisTick />}
               interval={0}
-              dx={-20}
             />
 
             {/* Render custom tooltip and cursor in the chart */}

@@ -1,18 +1,15 @@
 @import "../index.css"; /* Import global styles */
 
 .screen-size-checker {
-    padding: 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    margin: 20px;
-    text-align: center;
-  }
-  
-  .screen-size-checker p {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-  }
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  margin: 20px;
+}
 
-  
-  
+.screen-size-checker p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}

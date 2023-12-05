@@ -4,9 +4,11 @@ import "../styles/UserRadarChart.css";
 import { apiService } from "../services/apiService";
 
 const UserRadarChart = ({ userId }) => {
+  // State to store user performance data and error
   const [userPerformanceData, setUserPerformanceData] = useState(null);
   const [error, setError] = useState(null);
 
+  // Fetch user performance data from the API
   useEffect(() => {
     const fetchUserPerformanceData = async () => {
       try {
@@ -30,13 +32,13 @@ const UserRadarChart = ({ userId }) => {
     return <p>Loading...</p>;
   }
 
-  // Custom tick formatter
+  // Custom tick formatter for radar chart
   const formatTick = (value) => {
     const kindKeys = Object.keys(userPerformanceData.kind);
     const totalTicks = kindKeys.length;
     const formattedTickKey = kindKeys[(totalTicks - value) % totalTicks];
 
-    // customize tick names
+    // Customize tick names based on kind key
     switch (formattedTickKey) {
       case "1":
         return "Cardio";
@@ -55,6 +57,7 @@ const UserRadarChart = ({ userId }) => {
     }
   };
 
+  // Render the RadarChart component
   return (
     <div className="user-radar-chart">
       <RadarChart
@@ -72,4 +75,3 @@ const UserRadarChart = ({ userId }) => {
 };
 
 export default UserRadarChart;
-

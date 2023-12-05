@@ -9,7 +9,12 @@
   height: 779px;
   flex-shrink: 0;
   position: absolute;
-  top: 259px;
+  top: 152px;
   left: 224px;
-}
+} 
 
+@media (max-width: 1024px) and (max-height: 780px) {
+  .user-profile {
+    top: 259px;
+  }
+}

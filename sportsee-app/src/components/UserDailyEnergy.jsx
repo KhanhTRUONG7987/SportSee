@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/UserDailyEnergy.css';
-import { apiService } from '../services/apiService'; // Import the apiService
+import { apiService } from '../services/apiService'; 
 
 const NutrientSection = ({ nutrientType, count, unit, color, iconPath }) => {
   return (

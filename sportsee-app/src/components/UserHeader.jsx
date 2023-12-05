@@ -15,7 +15,6 @@ const UserHeader = ({ userId }) => {
         const data = await apiService.getUserMainData(userId);
         setUser(data);
       } catch (error) {
-        // Handle error if data fetching fails
         console.error("Error fetching user data:", error);
       }
     };
