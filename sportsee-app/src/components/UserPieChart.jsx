@@ -43,7 +43,7 @@ const UserPieChart = ({ userId }) => {
   // Render the UserPieChart component
   return (
     <div className="user-pie-chart">
-      <h3 className="subtitle">Score</h3>
+      <span className="subtitle">Score</span>
 
       {customLabel()}
 
@@ -69,7 +69,7 @@ const UserPieChart = ({ userId }) => {
             data={[{ value: userScore }]}
             cx="50%"
             cy="50%"
-            outerRadius={85}
+            outerRadius={88}
             innerRadius={75}
             startAngle={startAngle}
             endAngle={endAngle}

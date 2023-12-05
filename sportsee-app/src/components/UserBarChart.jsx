@@ -15,9 +15,8 @@ import "../styles/UserBarChart.css";
 
 // UserBarChart component
 const UserBarChart = ({ userId }) => {
-  // State to store user data and tooltip data
+  // State to store user data
   const [userData, setUserData] = useState(null);
-  const [tooltipData, setTooltipData] = useState(null);
 
   // Fetch user activity data when the component mounts or userId changes
   useEffect(() => {
@@ -44,17 +43,6 @@ const UserBarChart = ({ userId }) => {
       console.error("Invalid user data or sessions:", userData);
       return;
     }
-
-    const { day, sessions } = userData.sessions[index];
-    const { kilogram, calories } = sessions[0];
-
-    console.log("Day:", day, "Weight:", kilogram, "Calories:", calories);
-    setTooltipData({ day, kilogram, calories });
-  };
-
-  // Handle mouse leave event for a bar
-  const handleBarMouseLeave = () => {
-    setTooltipData(null);
   };
 
   // Generate chart data based on user data
@@ -162,7 +150,6 @@ const UserBarChart = ({ userId }) => {
               barSize={7}
               radius={[3.5, 3.5, 0, 0]}
               onMouseEnter={(props, index) => handleBarMouseEnter(props, index)}
-              onMouseLeave={handleBarMouseLeave}
             />
             <Bar
               dataKey="calories"
@@ -170,7 +157,6 @@ const UserBarChart = ({ userId }) => {
               barSize={7}
               radius={[3, 3, 0, 0]}
               onMouseEnter={(props, index) => handleBarMouseEnter(props, index)}
-              onMouseLeave={handleBarMouseLeave}
             />
           </BarChart>
         </ResponsiveContainer>

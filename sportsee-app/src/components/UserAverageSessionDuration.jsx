@@ -65,33 +65,30 @@ const UserAverageSessionDuration = ({ userId }) => {
   // State to store user average session data and clicked dot index
   const [average, setAverage] = useState([]);
   const [clickedDotIndex, setClickedDotIndex] = useState(null);
-  const day = ["L", "M", "M", "J", "V", "S", "D"];
 
   // Fetch user average sessions data from the API
   useEffect(() => {
+    const day = ["L", "M", "M", "J", "V", "S", "D"];
+  
     const fetchUserAverageSessions = async () => {
       try {
-        const userAverageSessions = await apiService.getUserAverageSessions(
-          userId
-        );
-
-        // Transform fetched data for use in the chart
+        const userAverageSessions = await apiService.getUserAverageSessions(userId);
+  
+        // Using 'day' inside the map function, but it's not part of the dependency array
         const data = userAverageSessions.sessions.map((session, index) => ({
           day: day[index],
           sessionLength: session.sessionLength,
         }));
-
+  
         setAverage(data);
       } catch (error) {
-        console.error(
-          `Error fetching user average sessions for ID ${userId}:`,
-          error
-        );
+        console.error(`Error fetching user average sessions for ID ${userId}:`, error);
       }
     };
-
+  
     fetchUserAverageSessions();
   }, [userId]);
+  
 
   // Fetch user main data from the API
   useEffect(() => {

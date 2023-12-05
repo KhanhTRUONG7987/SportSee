@@ -24,7 +24,9 @@
 .title-legend-group {
   display: flex;
   flex-direction: row;
-  gap: 200px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .activity-title {
@@ -34,12 +36,14 @@
   font-weight: 500;
   line-height: 24px;
   margin-bottom: 16px;
+  margin-right: 20px;
 }
 
 .legend-group {
   display: flex;
   justify-content: space-between;
   gap: 32px;
+  
 }
 
 .weight-group,

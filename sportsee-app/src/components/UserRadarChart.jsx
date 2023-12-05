@@ -16,7 +16,10 @@ const UserRadarChart = ({ userId }) => {
         setUserPerformanceData(performanceData);
         setError(null);
       } catch (error) {
-        console.error(`Error fetching user performance data for ID ${userId}:`, error.message);
+        console.error(
+          `Error fetching user performance data for ID ${userId}:`,
+          error.message
+        );
         setError(`Failed to fetch user performance data: ${error.message}`);
       }
     };
@@ -61,13 +64,20 @@ const UserRadarChart = ({ userId }) => {
   return (
     <div className="user-radar-chart">
       <RadarChart
-        outerRadius={90}
         width={258}
         height={263}
+        cx="50%"
+        cy="50%"
+        outerRadius="66%"
         data={userPerformanceData.data}
       >
         <PolarGrid />
-        <PolarAngleAxis tickFormatter={formatTick} dataKey="kind" tick={{ fontSize: 3, dy: 3}}/> 
+        <PolarAngleAxis
+          tickFormatter={formatTick}
+          dataKey="kind"
+          tickSize={15}
+          tick={{ fontSize: 3, dy: 3 }}
+        />
         <Radar name="User" dataKey="value" fill="#FF0101" fillOpacity={0.7} />
       </RadarChart>
     </div>

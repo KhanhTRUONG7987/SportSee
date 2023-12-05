@@ -25,7 +25,7 @@
 }
 
 /* Pie chart */
-.custom-label {
+.user-pie-chart .custom-label {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -35,20 +35,23 @@
   left: 50%;
   transform: translate(-50%, 0%);
   z-index: 10000;
+  color: #20253a;
 }
 
 .custom-score {
-  font-size: 24px;
+  font-size: 26px;
   color: #282d30;
-  font-family: 'Roboto-Bold';
+  font-family: "Roboto";
+  font-weight: 700;
   padding-bottom: 20px;
 }
 
 /* Styles for "de votre objectif" */
 .text-span {
-  color: #74798c;
+  color: rgba(116, 121, 140, 1);
   font-size: 16px;
-  font-weight: 100;
+  font-style: normal;
+  font-weight: 500;
   position: absolute;
   max-width: 30%;
   text-align: center;
@@ -57,3 +60,13 @@
   top: 78%;
 }
 
+.user-pie-chart .subtitle {
+  color: #20253a;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 160% */
+  width: 60%;
+  position: absolute;
+  top: 10px;
+}

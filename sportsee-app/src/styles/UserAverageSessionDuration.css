@@ -26,10 +26,6 @@
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
 } 
 
-.recharts-tooltip-wrapper {
-  opacity: 0.8;
-}
-
 .recharts-tooltip-label {
   font-size: 12px;
   color: white;
@@ -114,9 +110,8 @@
 }
 
 .customTooltip {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 1);
   padding: 5px;
-  border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -126,7 +121,7 @@
   color: #333;
 }
 
-.subtitle {
+.user-average-session-duration .subtitle {
   width: 147px;
   flex-shrink: 0;
   color: #fff;
@@ -140,4 +135,8 @@
 
 .user-average-session-duration .recharts-cartesian-axis-ticks {
   transform: translateY(26%);
+}
+
+.recharts-cartesian-axis-ticks {
+  opacity: 0.504;
 }
