@@ -14,7 +14,7 @@ A fitness dashboard project for tracking user activities and performance.
 git clone https://github.com/KhanhTRUONG7987/SportSee.git](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard.git
 
 # Install dependencies:
-cd cd SportSee-front-end-dashboard
+cd SportSee-front-end-dashboard
 follow guides here: https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard
 
 # Run the back:
